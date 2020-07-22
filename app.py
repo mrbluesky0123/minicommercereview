@@ -1,13 +1,18 @@
 from flask import Flask, request, jsonify, current_app
 import json
+import sys
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+# logger = logger.get_standard_logger('app')
 
 @app.route('/goodsreview/<goods_id>', methods=['GET'])
 def get_goods_review(goods_id):
     json_data = json.loads(request.data)
     return services.send_result_service(json_data)
 
+'''
 @app.route('/score/getrankdata', methods=['POST'])
 def get_rank_data():
     json_data = json.loads(request.data)
@@ -30,3 +35,8 @@ def register_user():
 def test():
     json_data = json.loads(request.data)
     return services.test(json_data)
+'''
+
+if __name__=='__main__':
+    port = int(sys.argv[1])
+    app.run(host='0.0.0.0', port=port)
