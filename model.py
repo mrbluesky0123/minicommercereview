@@ -33,4 +33,4 @@ class Review(Base):
                    % (self.goods_id, self.review_seq, self.user_id, self.review_score, self.review_cmmnt, self.reg_dt, self.regr_id, self.upd_dt, self.updr_id)
 
     def as_dict(self):
-        return {x.name: getattr(self, x.name) for x in self.__table__.columns
+        return {x.name: getattr(self, x.name) for x in self.__table__.columns}

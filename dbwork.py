@@ -3,14 +3,12 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from datetime import datetime
-from models import UserScore
+from model import Review
 from flask_sqlalchemy import SQLAlchemy
-from common import logger
 import app
-import configwork
-import MySQLdb
+# import MySQLdb
 import sqlalchemy
-
+import json
 
 def get_db_config():
     # config = configwork.get_config()
@@ -31,10 +29,23 @@ def connect():
     db_session = Session()
     return db_session
 
-def get_user_score(db_session, session_id, user_name):
+def get_user_reviews(db_session, goods_id):
     # Get user score from db
-    user_score = db_session.query(UserScore).filter(UserScore.session_id==session_id).one_or_none()
+    user_reviews = db_session.query(Review).filter(Review.goods_id==goods_id).all()
     # UserScore.query.filter_by(sessiod_id=session_id, user_name=user_name).first()
-    if user_score is None:
+    # print(type(user_reviews[0]))
+    user_reviews_list = []
+
+    if user_reviews is None:
         return None
-    return user_score.as_dict()
+    else:
+        for review in user_reviews:
+            review_json = review.as_dict()
+            user_reviews_list.append(review_json)
+
+    return user_reviews_list
+
+
+def close(db_session):
+    # Close session
+    db_session.close()

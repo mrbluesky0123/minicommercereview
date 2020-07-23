@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, current_app
 import json
 import sys
 from flask_cors import CORS
+import service
 
 app = Flask(__name__)
 CORS(app)
@@ -9,8 +10,8 @@ CORS(app)
 
 @app.route('/goodsreview/<goods_id>', methods=['GET'])
 def get_goods_review(goods_id):
-    json_data = json.loads(request.data)
-    return services.send_result_service(json_data)
+    # json_data = json.loads(request.data)
+    return jsonify(service.get_goods_review(goods_id))
 
 '''
 @app.route('/score/getrankdata', methods=['POST'])
