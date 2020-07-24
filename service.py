@@ -9,9 +9,14 @@ def get_goods_review_service(goods_id):
     reviews = dbwork.get_user_reviews(db_session, goods_id);
     print(type(reviews[0]))
     dbwork.close(db_session)
-    # Make response
     
-    return snake_to_camel(reviews)
+    # Make response to camel case
+    new_list = []
+    for review in reviews:
+        camel_cased_review = snake_to_camel(review)
+        new_list.append(camel_cased_review)
+    
+    return new_list
 
 def post_goods_review_service(request):
     db_session = dbwork.connect()
