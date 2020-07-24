@@ -14,19 +14,19 @@ class Review(Base):
     review_cmmnt = Column(String, primary_key=False)
     reg_dt = Column(DateTime, primary_key=False)
     regr_id = Column(String, primary_key=False)
-    upd_dt = Column(DateTime, primary_key=False)
-    updr_id = Column(String, primary_key=False)
+    upd_dt = Column(DateTime, primary_key=False, nullable=True)
+    updr_id = Column(String, primary_key=False, nullable=True)
 
     def __init__(self, goods_id, review_seq, user_id, review_score, review_cmmnt, reg_dt, regr_id, upd_dt, updr_id):
-        this.goods_id = goods_id
-        this.review_seq = review_seq
-        this.user_id = user_id
-        this.review_score = review_score
-        this.review_cmmnt = review_cmmnt
-        this.reg_dt = reg_dt
-        this.regr_id = regr_id
-        this.upd_dt = upd_dt
-        this.updr_id = updr_id
+        self.goods_id = goods_id
+        self.review_seq = review_seq
+        self.user_id = user_id
+        self.review_score = review_score
+        self.review_cmmnt = review_cmmnt
+        self.reg_dt = reg_dt
+        self.regr_id = regr_id
+        self.upd_dt = upd_dt
+        self.updr_id = updr_id
 
     def __repr__(self):
         return 'goods_id: %d, review_seq: %d, user_id: %s, review_score: %d, review_cmmnt: %s, reg_dt: %s, regr_id: %s, upd_dt: %s, updr_id: %s'\

@@ -45,6 +45,27 @@ def get_user_reviews(db_session, goods_id):
 
     return user_reviews_list
 
+def post_goods_review(db_session, goods_review):
+    max_seq = -99
+    max_seq_query = 'SELECT max(review_seq) FROM goods_review WHERE goods_id = %d' % goods_review['goods_id']
+    max_seq = db_session.execute(max_seq_query).fetchone()[0]
+    print('max seq = %d' % max_seq)
+    insert_result = Review(goods_id=goods_review['goods_id'], 
+                            review_seq=int(max_seq) + 1, 
+                            user_id=goods_review['user_id'], 
+                            review_score=goods_review['review_score'],
+                            review_cmmnt=goods_review['review_cmmnt'],
+                            regr_id='APP',
+                            reg_dt=datetime.now(),
+                            updr_id=None,
+                            upd_dt=None
+                        )
+    
+    db_session.add(insert_result)
+    db_session.commit()
+    if insert_result == None:
+        return 'False'
+    return 'True'
 
 def close(db_session):
     # Close session

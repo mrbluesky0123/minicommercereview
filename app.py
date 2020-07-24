@@ -11,14 +11,14 @@ CORS(app)
 @app.route('/goodsreview/<goods_id>', methods=['GET'])
 def get_goods_review(goods_id):
     # json_data = json.loads(request.data)
-    return jsonify(service.get_goods_review(goods_id))
+    return jsonify(service.get_goods_review_service(goods_id))
 
-'''
-@app.route('/score/getrankdata', methods=['POST'])
-def get_rank_data():
+
+@app.route('/goodsreview', methods=['POST'])
+def post_goods_review():
     json_data = json.loads(request.data)
-    return services.get_rank_data_service(json_data)
-
+    return service.post_goods_review_service(json_data)
+'''
 @app.route('/score/checkrestartable/<session_id>', methods=['GET'])
 def check_restartable(session_id):
     return services.check_restartable_service(session_id)
