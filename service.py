@@ -19,3 +19,15 @@ def post_goods_review_service(request):
     dbwork.close(db_session)
     
     return result
+
+def snake_to_camel(dict):
+    keys = dict.keys()
+    new_dict = {}
+    for snake_cased_key in keys:
+        # Convert into camel
+        components = snake_cased_key.split('_')
+        camel_cased_key = components[0] + ''.join(x.title() for x in components[1:])
+        # Set new value to camel cased key
+        new_dict[camel_cased_key] = dict[snake_cased_key]
+    
+    return new_dict
