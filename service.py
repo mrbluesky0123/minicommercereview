@@ -40,7 +40,7 @@ def snake_to_camel(dict):
     
     return new_dict
 
-def camel_to_snake(dict)
+def camel_to_snake(dict):
     keys = dict.keys()
     new_dict = {}
     for camel_cased_key in keys:
