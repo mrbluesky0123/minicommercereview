@@ -7,7 +7,7 @@ def get_goods_review_service(goods_id):
     print('Received request: ' + str(goods_id)) 
     db_session = dbwork.connect()
     reviews = dbwork.get_user_reviews(db_session, goods_id);
-    
+    print(type(reviews[0]))
     dbwork.close(db_session)
     # Make response
     
