@@ -16,6 +16,7 @@ def get_goods_review(goods_id):
 
 @app.route('/goodsreview', methods=['POST'])
 def post_goods_review():
+    # This is comment.
     json_data = json.loads(request.data)
     return service.post_goods_review_service(json_data)
 '''
